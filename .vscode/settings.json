@@ -1,0 +1,12 @@
+{
+    "calva.replConnectSequences": [
+        {
+            "projectType": "deps.edn",
+            "name": "poly-serverless",
+            "cljsType": "none",
+            "menuSelections": {
+                "cljAliases": ["dev", "test", "+default"]
+            }
+        }
+    ]
+}
