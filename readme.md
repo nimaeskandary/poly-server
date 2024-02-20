@@ -11,3 +11,72 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 <h1>poly-serverless</h1>
 
 <p>Add your workspace documentation here...</p>
+
+# Table of Contents
+
+1. [Development](#development)
+  * [Dependencies](#dependencies)
+  * [Getting things working with your IDE](#getting-things-working-with-your-ide)
+  * [Creating a component](#creating-a-component)
+
+# Development
+
+## Dependencies
+
+* docker
+* poly - `brew install polyfy/polylith/poly`
+* psql - `brew install postgresql`
+
+## Getting things working with your IDE
+
+* see https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/development
+* some notes for Cursive
+  * select the Aliases `dev, test`
+  * Go to `Settings→Languages & Frameworks→Clojure→Project Specific Options and check "Resolve over whole project"` to make things resolve correctly across different subprojects with our root `deps.edn` setup
+
+### Creating a component
+
+building block that encapsulates a specific domain or part of the system
+
+* `poly shell`
+* `create component name:user`
+* add component to `<root>/deps.edn`
+```clojure
+{:aliases  {:dev {:extra-paths ["development/src"]
+                  ;; to extra dev deps
+                  :extra-deps {poly/user {:local/root "components/user"}}}}
+            ;; to extra test paths
+            :test {:extra-paths ["components/user/test"]}} 
+```
+* `info`
+
+### creating a base
+
+building block that exposes a public API to the outside world, e.g., external systems and users
+
+* `poly shell`
+* `create base name:web`
+* add base to `<root>/deps.edn`
+```clojure
+:aliases  {:dev {:extra-paths ["development/src"]
+                  ;; to extra dev deps
+                  :extra-deps {poly/web {:local/root "bases/cli"}}}
+            ;; to extra test paths
+            :test {:extra-paths ["bases/cli/test"]}}
+```
+
+### creating a project
+
+used to build a deployable artifact
+
+* `poly shell`
+* `create project name:backend`
+* add project to `<root>/workspace.edn`
+```clojure
+{:projects {"backend" {:alias "backend"}}}
+```
+* add components and bases to `<root>/projects/backend/deps.edn`
+```clojure
+{:deps {poly/user {:local/root "../../components/user"} 
+        poly/web  {:local/root "../../bases/cli"}}}
+```

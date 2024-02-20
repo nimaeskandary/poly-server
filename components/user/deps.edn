@@ -1,0 +1,6 @@
+{:paths ["src" "resources"]
+ :deps {com.stuartsierra/component     {:mvn/version "1.1.0"}
+        com.github.seancorfield/honeysql {:mvn/version "2.5.1103"}
+        metosin/malli {:mvn/version "0.14.0"}}
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps {}}}}
