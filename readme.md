@@ -12,11 +12,11 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 
 # Table of Contents
 
-1. [Development](#development)
+* [Development](#development)
   * [Dependencies](#dependencies)
   * [Getting things working with your IDE](#getting-things-working-with-your-ide)
   * [REPL development](#repl-development)
-  * [Creating a component](#creating-a-component)
+  * [Polylith commands](#polylith-commands)
 
 # Development
 
@@ -39,6 +39,8 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * start a clojure nrepl with opts `-A:dev:test`
 * the dev system will start on its own via loading `components/development/user.clj`
 * explore `components/development/user.clj` for things to try
+
+## Polylith commands
 
 ### Creating a component
 
