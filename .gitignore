@@ -6,13 +6,7 @@
 **/.gradle
 
 # User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/shelf
-.idea/**/statistic.xml
-.idea/dictionaries/**
-.idea/libraries/**
+.idea/
 
 # File-based project format
 *.iws
@@ -37,3 +31,6 @@ projects/**/pom.xml
 
 # Calva VS Code Extension
 .calva/output-window/output.calva-repl
+
+# docker
+docker/volumes
