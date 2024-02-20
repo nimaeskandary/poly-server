@@ -8,15 +8,14 @@ The Polylith documentation can be found here:
 
 You can also get in touch with the Polylith Team on [Slack](https://clojurians.slack.com/archives/C013B7MQHJQ).
 
-<h1>poly-serverless</h1>
-
-<p>Add your workspace documentation here...</p>
+<h1>poly-server</h1>
 
 # Table of Contents
 
 1. [Development](#development)
   * [Dependencies](#dependencies)
   * [Getting things working with your IDE](#getting-things-working-with-your-ide)
+  * [REPL development](#repl-development)
   * [Creating a component](#creating-a-component)
 
 # Development
@@ -33,6 +32,13 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * some notes for Cursive
   * select the Aliases `dev, test`
   * Go to `Settings→Languages & Frameworks→Clojure→Project Specific Options and check "Resolve over whole project"` to make things resolve correctly across different subprojects with our root `deps.edn` setup
+
+## REPL development
+
+* run `bin/docker-up.sh`
+* start a clojure nrepl with opts `-A:dev:test`
+* the dev system will start on its own via loading `components/development/user.clj`
+* explore `components/development/user.clj` for things to try
 
 ### Creating a component
 

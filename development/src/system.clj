@@ -1,4 +1,4 @@
-(ns dev.system
+(ns system
   (:require [nimaeskandary.db.interface.postgres :as postgres-db]
             [nimaeskandary.user.interface.postgres :as user-repo]
             [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
@@ -20,3 +20,4 @@
 (defn init-dev-system [] (alter-var-root #'*system* (constantly (create-dev-system))))
 (defn start-system [] (alter-var-root #'*system* component/start))
 (defn stop-system [] (alter-var-root #'*system* #(when % (component/stop-system %) nil)))
+(defn restart-dev-system [] (system/stop-system) (system/init-dev-system) (system/start-system))
