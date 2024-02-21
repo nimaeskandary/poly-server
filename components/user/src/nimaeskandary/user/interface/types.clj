@@ -1,4 +1,4 @@
-(ns nimaeskandary.user.interface.spec)
+(ns nimaeskandary.user.interface.types)
 
 (def User
   [:map

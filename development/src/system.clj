@@ -1,6 +1,6 @@
 (ns system
   (:require [nimaeskandary.db.interface.postgres :as postgres-db]
-            [nimaeskandary.user.interface.postgres :as user-repo]
+            [nimaeskandary.user.interface.sql :as user-repo]
             [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
             [com.stuartsierra.component :as component]))
 
@@ -8,11 +8,11 @@
 
 (defn dev-system-map [config]
   (component/system-map
-    :app-db (postgres-db/->PostgresDatabase "postgres" "password" "localhost" "55432" "app")
-    :app-db-migrations (app-db-migrations/->AppDBMigrations)
-    :user-repo (user-repo/->PostgresUserRepository)))
+    :app-db (postgres-db/create-postgres-db "postgres" "password" "localhost" "55432" "app")
+    :app-db-migrations (app-db-migrations/create-app-db-migrations)
+    :user-repo (user-repo/create-sql-user-repository)))
 
-(def dependency-map {:app-db-migrations [:app-db]
+(def dependency-map {:app-db-migrations {:db :app-db}
                      :user-repo [:app-db]})
 
 (defn create-dev-system [] (component/system-using (dev-system-map {}) dependency-map))
