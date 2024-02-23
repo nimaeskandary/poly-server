@@ -2,18 +2,22 @@
   (:require [nimaeskandary.db.interface.postgres :as postgres-db]
             [nimaeskandary.user.interface.sql :as user-repo]
             [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
+            [nimaeskandary.logging.interface.timbre :as logger]
             [com.stuartsierra.component :as component]))
 
 (defonce ^:dynamic *system* nil)
 
 (defn dev-system-map [config]
   (component/system-map
+    :logger (logger/create-timbre-logger)
     :app-db (postgres-db/create-postgres-db "postgres" "password" "localhost" "55432" "app")
     :app-db-migrations (app-db-migrations/create-app-db-migrations)
     :user-repo (user-repo/create-sql-user-repository)))
 
-(def dependency-map {:app-db-migrations {:db :app-db}
-                     :user-repo [:app-db]})
+(def dependency-map {:logger []
+                     :app-db [:logger]
+                     :app-db-migrations {:logger :logger :db :app-db}
+                     :user-repo [:logger :app-db]})
 
 (defn create-dev-system [] (component/system-using (dev-system-map {}) dependency-map))
 
