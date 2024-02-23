@@ -3,6 +3,8 @@
             [nimaeskandary.user.interface.sql :as user-repo]
             [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
             [nimaeskandary.logging.interface.timbre :as logger]
+            [nimaeskandary.server.interface.ring-jetty-server :as server]
+            [nimaeskandary.web.core :as web.core]
             [com.stuartsierra.component :as component]))
 
 (defonce ^:dynamic *system* nil)
@@ -12,12 +14,16 @@
     :logger (logger/create-timbre-logger)
     :app-db (postgres-db/create-postgres-db "postgres" "password" "localhost" "55432" "app")
     :app-db-migrations (app-db-migrations/create-app-db-migrations)
-    :user-repo (user-repo/create-sql-user-repository)))
+    :user-repo (user-repo/create-sql-user-repository)
+    :server (server/->JettyServer web.core/route-handler 9000 {})))
 
 (def dependency-map {:logger []
                      :app-db [:logger]
-                     :app-db-migrations {:logger :logger :db :app-db}
-                     :user-repo [:logger :app-db]})
+                     :app-db-migrations {:logger :logger
+                                         :db :app-db}
+                     :user-repo [:logger :app-db]
+                     :server [:logger
+                              :user-repo]})
 
 (defn create-dev-system [] (component/system-using (dev-system-map {}) dependency-map))
 
