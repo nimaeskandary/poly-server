@@ -3,4 +3,4 @@
 (defn wrap-system
   [handler system]
   (fn [req]
-    (handler (assoc req :system system))))
+    (handler (assoc req :application/system system))))

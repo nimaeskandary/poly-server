@@ -1,5 +1,6 @@
 {:paths ["src" "resources"]
  :deps {ring/ring-core {:mvn/version "1.11.0"}
+        ring/ring-json {:mvn/version "0.5.1"}
         compojure {:mvn/version "1.7.1"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {}}}}
