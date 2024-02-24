@@ -6,5 +6,10 @@
    [:username :string]
    [:email :string]])
 
-(def save-user [:=> [:cat :map User] User])
+(def CreateUser
+  [:map
+   [:username :string]
+   [:email :string]])
+
+(def create-user [:=> [:cat :map CreateUser] User])
 (def get-user [:=> [:cat :map :uuid] User])

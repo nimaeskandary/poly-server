@@ -16,32 +16,35 @@
           []
           results))
 
-(defn save-user [{:keys [app-db]} user] (->> (-> (h/insert-into :users)
-                                                 (h/values [user])
-                                                 (h/returning :id :email :username)
-                                                 (sql/format))
-                                             (jdbc/execute! app-db)
-                                             from-db
-                                             first))
-(m/=> save-user types/save-user)
+(defn create-user [{:keys [app-db]} user]
+  (let [to-db (assoc user :id (random-uuid))]
+    (->> (-> (h/insert-into :users)
+             (h/values [to-db])
+             (h/returning :id :email :username)
+             (sql/format))
+         (jdbc/execute! app-db)
+         from-db
+         first)))
+(m/=> create-user types/create-user)
 
-(defn get-user [{:keys [app-db]} user-id] (->> (-> (h/select :id :username :email)
-                                                   (h/from :users)
-                                                   (h/where [:= :id user-id])
-                                                   (sql/format))
-                                               (jdbc/execute! app-db)
-                                               from-db
-                                               first))
+(defn get-user [{:keys [app-db]} user-id]
+  (->> (-> (h/select :id :username :email)
+           (h/from :users)
+           (h/where [:= :id user-id])
+           (sql/format))
+       (jdbc/execute! app-db)
+       from-db
+       first))
 (m/=> get-user types/get-user)
 
 (defrecord SqlUserRepository [])
 
 (extend-type SqlUserRepository
+  interface/UserRepository
+  (create-user [this user] (create-user this user))
+  (get-user [this user-id] (get-user this user-id)))
+
+(extend-type SqlUserRepository
   component/Lifecycle
   (start [this] this)
   (stop [this] this))
-
-(extend-type SqlUserRepository
-  interface/UserRepository
-  (save-user [this user] (save-user this user))
-  (get-user [this user-id] (get-user this user-id)))

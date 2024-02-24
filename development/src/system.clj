@@ -15,7 +15,7 @@
     :app-db (postgres-db/create-postgres-db "postgres" "password" "localhost" "55432" "app")
     :app-db-migrations (app-db-migrations/create-app-db-migrations)
     :user-repo (user-repo/create-sql-user-repository)
-    :server (server/->HttpKitServer web.core/route-handler {:port 9000})))
+    :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
 
 (def dependency-map {:logger []
                      :app-db [:logger]

@@ -15,7 +15,7 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * [Development](#development)
   * [Dependencies](#dependencies)
   * [Getting things working with your IDE](#getting-things-working-with-your-ide)
-  * [REPL development](#repl-development)
+  * [Running locally](#running-locally)
   * [Polylith commands](#polylith-commands)
 
 # Development
@@ -33,12 +33,12 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
   * select the Aliases `dev, test`
   * Go to `Settings→Languages & Frameworks→Clojure→Project Specific Options and check "Resolve over whole project"` to make things resolve correctly across different subprojects with our root `deps.edn` setup
 
-## REPL development
+## Running locally
 
 * run `bin/docker-up.sh`
 * start a clojure nrepl with opts `-A:dev:test`
 * the dev system will start on its own via loading `components/development/user.clj`
-* explore `components/development/user.clj` for things to try
+* go to http://localhost:9000/api-docs/ to play with the api
 
 ## Polylith commands
 
