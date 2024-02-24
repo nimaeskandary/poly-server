@@ -12,8 +12,9 @@
     [this message extra])
   (warn
     [this message]
-    [this message extra])
+    [this message ex]
+    [this message ex extra])
   (error
-    [this error]
-    [this error message]
-    [this error message extra]))
+    [this message]
+    [this message ex]
+    [this message ex extra]))

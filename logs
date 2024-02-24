@@ -1,9 +1,0 @@
-2024-02-23T04:49:31.008Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:34] - getting datasource to db {:db "app"}
-2024-02-23T04:49:31.550Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:33] - started http server on port 9000
-2024-02-23T05:00:33.486Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:34] - getting datasource to db {:db "app"}
-2024-02-23T05:00:34.048Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:33] - started http server on port 9000
-2024-02-23T05:03:26.914Z Nimas-Mac-mini.local INFO [nimaeskandary.web.routes.users:16] - {:system nil, :ssl-client-cert nil, :protocol "HTTP/1.1", :remote-addr "[0:0:0:0:0:0:0:1]", :params {:id "1eb466c8-9a25-4b0c-9019-6a7688b44677"}, :route-params {:id "1eb466c8-9a25-4b0c-9019-6a7688b44677"}, :headers {"accept" "*/*", "user-agent" "curl/8.4.0", "host" "localhost:9000"}, :server-port 9000, :content-length nil, :compojure/route [:get "/users/:id"], :content-type nil, :character-encoding nil, :uri "/users/1eb466c8-9a25-4b0c-9019-6a7688b44677", :server-name "localhost", :query-string nil, :body #object[org.eclipse.jetty.server.HttpInput 0x6cdb2676 "HttpInput@1826301558 cs=HttpChannelState@2965e900{s=HANDLING rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0} cp=org.eclipse.jetty.server.BlockingContentProducer@7b691ff0 eof=false"], :scheme :http, :request-method :get}
-2024-02-23T05:05:04.128Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:34] - getting datasource to db {:db "app"}
-2024-02-23T05:05:04.686Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:33] - started http server on port 9000
-2024-02-23T05:05:19.868Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:33] - 1eb466c8-9a25-4b0c-9019-6a7688b44677
-2024-02-23T05:07:57.536Z Nimas-Mac-mini.local INFO [nimaeskandary.logging.lib.timbre-logger:33] - 1eb466c8-9a25-4b0c-9019-6a7688b44677

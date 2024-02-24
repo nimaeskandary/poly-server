@@ -1,7 +1,6 @@
 (ns nimaeskandary.web.routes.users
   (:require
     [nimaeskandary.user.interface :as user.interface]
-    [nimaeskandary.logging.interface :as log]
     [compojure.coercions :refer [as-uuid]]
     [compojure.core :refer [GET POST]]
     [ring.util.response :as resp]))

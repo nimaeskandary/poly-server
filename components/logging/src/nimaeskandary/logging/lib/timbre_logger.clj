@@ -34,8 +34,9 @@
     ([_ message extra] (timbre/info message extra)))
   (warn
     ([_ message] (timbre/warn message))
-    ([_ message extra] (timbre/warn message extra)))
+    ([_ message ex] (timbre/warn message ex))
+    ([_ message ex extra] (timbre/warn message ex extra)))
   (error
-    ([_ error] (timbre/error error))
-    ([_ error message] (timbre/error error message))
-    ([_ error message extra] (timbre/error error message extra))))
+    ([_ message] (timbre/error message))
+    ([_ message ex] (timbre/error message ex))
+    ([_ message ex extra] (timbre/error message ex extra))))
