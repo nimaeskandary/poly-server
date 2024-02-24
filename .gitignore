@@ -36,4 +36,4 @@ projects/**/pom.xml
 docker/volumes
 
 # project
-./logs
+logs
