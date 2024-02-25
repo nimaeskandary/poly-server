@@ -10,7 +10,7 @@
   component/Lifecycle
     (start [{:keys [config], :as this}]
       (let [config (or config
-                       {:min-level :debug,
+                       {:min-level :info,
                         :ns-filter #{"*"},
                         :middleware [],
                         :timestamp-opts timbre/default-timestamp-opts,
