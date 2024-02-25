@@ -1,5 +1,5 @@
 (ns nimaeskandary.db.interface.sql-test
-  (:require [nimaeskandary.db.interface.sql :as sql-db]
+  (:require [nimaeskandary.testing.system.db :as db]
             [nimaeskandary.logging.interface :as logger]
             [next.jdbc :as jdbc]
             [next.jdbc.result-set :as result-set]
@@ -11,13 +11,15 @@
 
 (deftest sql-db-test
   (let [system (-> (component/system-map :logger (stub logger/Logger)
-                                         :db (sql-db/create-sql-db
-                                               {:dbtype "h2", :dbname "app"}))
+                                         :db (db/create-in-memory-postgres-db
+                                               "test"))
                    (component/system-using {:logger [], :db [:logger]})
                    component/start)
         db-component (:db system)]
     (testing "component start adds datasource"
       (is (some? (:datasource db-component))))
+    (testing "jdbcUrl gets options"
+      (is (some? (re-find #".*MODE=PostgreSQL$" (:jdbcUrl db-component)))))
     (testing "can execute statements"
       (jdbc/execute! db-component ["DROP ALL OBJECTS"])
       (->> (-> (h/create-table :test)
