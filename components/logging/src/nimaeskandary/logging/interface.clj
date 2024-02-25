@@ -1,6 +1,8 @@
 (ns nimaeskandary.logging.interface)
 
 (defprotocol Logger
+  (start [this])
+  (stop [this])
   (trace [this message]
          [this message extra])
   (debug [this message]

@@ -1,19 +1,22 @@
-(ns nimaeskandary.db.lib.postgres-db
+(ns nimaeskandary.db.lib.sql-db
   (:require [nimaeskandary.logging.interface :as log]
             [com.stuartsierra.component :as component]
             [next.jdbc.connection :as connection])
   (:import (com.zaxxer.hikari HikariDataSource)))
 
-(defrecord PostgresDatabase [user password host port dbname])
+(defrecord SqlDatabase [config])
 
-(extend-type PostgresDatabase
+(extend-type SqlDatabase
   component/Lifecycle
-    (start [{:keys [user password host port dbname logger], :as this}]
+    (start [{:keys [logger],
+             {:keys [dbname dbtype username password host port]} :config,
+             :as this}]
+      {:pre [(every? some? [dbtype dbname])]}
       (log/info logger "getting datasource to db" {:db dbname})
       (assoc this
         :datasource (connection/->pool HikariDataSource
-                                       {:dbtype "postgres",
-                                        :username user,
+                                       {:dbtype dbtype,
+                                        :username username,
                                         :password password,
                                         :host host,
                                         :port port,

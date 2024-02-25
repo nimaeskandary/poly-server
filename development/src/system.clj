@@ -1,5 +1,5 @@
 (ns system
-  (:require [nimaeskandary.db.interface.postgres :as postgres-db]
+  (:require [nimaeskandary.db.interface.sql :as sql-db]
             [nimaeskandary.user.interface.sql :as user-repo]
             [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
             [nimaeskandary.logging.interface.timbre :as logger]
@@ -13,9 +13,12 @@
   [_]
   (component/system-map
     :logger (logger/create-timbre-logger)
-    :app-db (postgres-db/create-postgres-db "postgres"
-                                            "password" "localhost"
-                                            "55432" "app")
+    :app-db (sql-db/create-sql-db {:dbtype "postgres",
+                                   :dbname "app",
+                                   :username "postgres",
+                                   :password "password",
+                                   :host "localhost",
+                                   :port "55432"})
     :app-db-migrations (app-db-migrations/create-app-db-migrations)
     :user-repo (user-repo/create-sql-user-repository)
     :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
