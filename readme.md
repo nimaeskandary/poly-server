@@ -63,6 +63,12 @@ You can force a commit through if you want with the `--no-verify` flag
 
 ## Polylith commands
 
+### Libraries
+
+* `poly libs` - see project dependencies
+* `poly libs :outdated` - see outdated dependencies
+* `poly libs :update` - update dependencies
+
 ### Creating a component
 
 building block that encapsulates a specific domain or part of the system
