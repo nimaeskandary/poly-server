@@ -2,7 +2,9 @@
   (:require
     [nimaeskandary.logging.interface :as log]
     [com.stuartsierra.component :as component]
-    [next.jdbc :as jdbc]))
+    [next.jdbc :as jdbc]
+    [next.jdbc.connection :as connection])
+  (:import (com.zaxxer.hikari HikariDataSource)))
 
 (defrecord PostgresDatabase [user password host port dbname])
 
@@ -12,5 +14,7 @@
     (log/info logger "getting datasource to db" {:db dbname})
     (assoc this
       :datasource
-      (jdbc/get-datasource {:dbtype "postgres" :user user :password password :host host :port port :dbname dbname})))
-  (stop [this] (dissoc this :datasource)))
+      (connection/->pool HikariDataSource {:dbtype "postgres" :username user :password password :host host :port port :dbname dbname})))
+  (stop [{:keys [datasource] :as this}]
+    (when datasource (.close ^HikariDataSource datasource))
+    (dissoc this :datasource)))
