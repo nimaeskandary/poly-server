@@ -14,7 +14,10 @@ else
     against=$(git hash-object -t tree /dev/null)
 fi
 
-if ! (git diff --cached --name-only --diff-filter=AM "$against" | grep -E '.clj[cs]?$' | xargs -r clj-kondo --lint)
+FILES=$(git diff --cached --name-only --diff-filter=AM "$against" | grep -E '.clj[cs]?$')
+[ -z "$FILES" ] && exit 0
+
+if ! (echo "$FILES" | grep -E '.clj[cs]?$' | xargs -r clj-kondo --lint)
 then
     echo
     echo "Error: new clj-kondo errors found. Please fix them and retry the commit."
