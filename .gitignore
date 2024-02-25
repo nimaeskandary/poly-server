@@ -37,3 +37,6 @@ docker/volumes
 
 # project
 logs
+
+## h2
+*.db
