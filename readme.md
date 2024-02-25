@@ -25,6 +25,8 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * docker
 * poly - `brew install polyfy/polylith/poly`
 * psql - `brew install postgresql`
+* clj-kondo - `brew install borkdude/brew/clj-kondo`
+  * there is a pre commit hook that runs `clj-kondo --lint` on changed files
 
 ## Getting things working with your IDE
 
@@ -38,7 +40,7 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * run `bin/docker-up.sh`
 * start a clojure nrepl with opts `-A:dev:test`
 * the dev system will start on its own via loading `components/development/user.clj`
-* go to http://localhost:9000/api-docs/ to play with the api
+* go to http://localhost:9000/api-docs/ to see endpoints and send requests from your browser
 
 ## Polylith commands
 

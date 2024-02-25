@@ -18,7 +18,7 @@
                                          http-kit-config)]
       (log/info logger (format "started http server on port %d" (:port http-kit-config)))
       (assoc this :http-server http-server)))
-  (stop [{:keys [http-server :as this]}]
+  (stop [{:keys [http-server] :as this}]
     (when http-server
       (http-server :timeout 100))
     (dissoc this :http-server)))

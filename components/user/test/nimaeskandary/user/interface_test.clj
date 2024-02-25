@@ -1,6 +1,5 @@
 (ns nimaeskandary.user.interface-test
-  (:require [clojure.test :as test :refer :all]
-            [nimaeskandary.user.interface :as user]))
+  (:require [clojure.test :as test]))
 
-(deftest dummy-test
-  (is (= 1 1)))
+(test/deftest dummy-test
+  (test/is (= 1 1)))

@@ -2,7 +2,6 @@
   (:require
     [nimaeskandary.logging.interface :as log]
     [com.stuartsierra.component :as component]
-    [next.jdbc :as jdbc]
     [next.jdbc.connection :as connection])
   (:import (com.zaxxer.hikari HikariDataSource)))
 

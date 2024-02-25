@@ -9,7 +9,7 @@
 
 (defonce ^:dynamic *system* nil)
 
-(defn dev-system-map [config]
+(defn dev-system-map [_]
   (component/system-map
     :logger (logger/create-timbre-logger)
     :app-db (postgres-db/create-postgres-db "postgres" "password" "localhost" "55432" "app")
