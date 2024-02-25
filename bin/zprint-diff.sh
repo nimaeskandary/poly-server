@@ -14,11 +14,11 @@ fi
 FILES=$(git diff --cached --name-only --diff-filter=AM "$against" | grep -E '.clj[cs]?$')
 [ -z "$FILES" ] && exit 0
 
-if ! (echo "$FILES" | xargs zprint)
+if ! (echo "$FILES" | xargs zprint -w)
 then
     echo
     echo "Error: zprint errors found. Please fix them and retry the commit."
     exit 1
 fi
 
-(echo "$FILES" | git add)
+echo "$FILES" | xargs git add

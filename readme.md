@@ -44,12 +44,16 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 
 ## Linting and formatting
 
-You can create pre commit hook to lint files before they are committed
+You can create a pre commit hook to lint and format files before they are committed
 
 * `touch .git/hooks/pre-commit`
 * add contents
 ```bash
 #!/usr/bin/env bash
+if ! (./bin/zprint-diff.sh)
+then
+  exit 1
+fi
 ./bin/kondo-diff.sh
 exit $?
 ```
