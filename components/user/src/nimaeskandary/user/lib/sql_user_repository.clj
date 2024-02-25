@@ -1,22 +1,24 @@
 (ns nimaeskandary.user.lib.sql-user-repository
-  (:require
-    [nimaeskandary.user.interface.types :as types]
-    [nimaeskandary.user.interface :as interface]
-    [com.stuartsierra.component :as component]
-    [honey.sql :as sql]
-    [honey.sql.helpers :as h]
-    [next.jdbc :as jdbc]
-    [malli.core :as m]))
+  (:require [nimaeskandary.user.interface.types :as types]
+            [nimaeskandary.user.interface :as interface]
+            [com.stuartsierra.component :as component]
+            [honey.sql :as sql]
+            [honey.sql.helpers :as h]
+            [next.jdbc :as jdbc]
+            [malli.core :as m]))
 
-(defn from-db [results]
+(defn from-db
+  [results]
   (reduce (fn [formatted r]
-            (conj formatted {:id (:users/id r)
-                             :email (:users/email r)
-                             :username (:users/username r)}))
-          []
-          results))
+            (conj formatted
+                  {:id (:users/id r),
+                   :email (:users/email r),
+                   :username (:users/username r)}))
+    []
+    results))
 
-(defn create-user [{:keys [app-db]} user]
+(defn create-user
+  [{:keys [app-db]} user]
   (let [to-db (assoc user :id (random-uuid))]
     (->> (-> (h/insert-into :users)
              (h/values [to-db])
@@ -27,7 +29,8 @@
          first)))
 (m/=> create-user types/create-user)
 
-(defn get-user [{:keys [app-db]} user-id]
+(defn get-user
+  [{:keys [app-db]} user-id]
   (->> (-> (h/select :id :username :email)
            (h/from :users)
            (h/where [:= :id user-id])
@@ -41,10 +44,10 @@
 
 (extend-type SqlUserRepository
   interface/UserRepository
-  (create-user [this user] (create-user this user))
-  (get-user [this user-id] (get-user this user-id)))
+    (create-user [this user] (create-user this user))
+    (get-user [this user-id] (get-user this user-id)))
 
 (extend-type SqlUserRepository
   component/Lifecycle
-  (start [this] this)
-  (stop [this] this))
+    (start [this] this)
+    (stop [this] this))

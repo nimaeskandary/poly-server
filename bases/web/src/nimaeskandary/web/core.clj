@@ -13,38 +13,49 @@
 (defn app
   [{:keys [system dev?]}]
   (let [handler
-        #(ring/ring-handler
-           (ring/router
-             [["/api"
-               [user-routes]]
-              ["/swagger.json"
-               {:get {:no-doc  true
-                      :swagger {:info     {:title "Poly Server"}
-                                :basePath "/"}
-                      :handler (swagger/create-swagger-handler)}}]]
-             {:data {;; for json response encoding
-                     :muuntaja   muuntaja/instance
-                     :middleware [[middleware.core/wrap-system system]
-                                  ;; for json response encoding
-                                  middleware.muuntaja/format-middleware
-                                  ;; for malli coercions
-                                  ring.coercion/coerce-exceptions-middleware
-                                  ring.coercion/coerce-request-middleware
-                                  ring.coercion/coerce-response-middleware]
-                     :coercion   (coercion.malli/create {:transformers     {:body     {:default coercion.malli/default-transformer-provider
-                                                                                       :formats {"application/json" coercion.malli/json-transformer-provider}}
-                                                                            :string   {:default coercion.malli/string-transformer-provider}
-                                                                            :response {:default coercion.malli/default-transformer-provider
-                                                                                       :formats {"application/json" coercion.malli/json-transformer-provider}}}
-                                                         :error-keys       #{:humanized}
-                                                         :lite             true
-                                                         :compile          m.util/closed-schema
-                                                         :validate         true
-                                                         :strip-extra-keys true
-                                                         :default-values   true
-                                                         :options          nil})}})
-
-           (ring/routes
-             (swagger-ui/create-swagger-ui-handler {:path "/api-docs"})
-             (ring/create-default-handler)))]
+          #(ring/ring-handler
+             (ring/router
+               [["/api" [user-routes]]
+                ["/swagger.json"
+                 {:get {:no-doc true,
+                        :swagger {:info {:title "Poly Server"}, :basePath "/"},
+                        :handler (swagger/create-swagger-handler)}}]]
+               {:data
+                  {;; for json response encoding
+                   :muuntaja muuntaja/instance,
+                   :middleware [[middleware.core/wrap-system system]
+                                ;; for json response encoding
+                                middleware.muuntaja/format-middleware
+                                ;; for malli coercions
+                                ring.coercion/coerce-exceptions-middleware
+                                ring.coercion/coerce-request-middleware
+                                ring.coercion/coerce-response-middleware],
+                   :coercion
+                     (coercion.malli/create
+                       {:transformers
+                          {:body
+                             {:default
+                                coercion.malli/default-transformer-provider,
+                              :formats
+                                {"application/json"
+                                   coercion.malli/json-transformer-provider}},
+                           :string
+                             {:default
+                                coercion.malli/string-transformer-provider},
+                           :response
+                             {:default
+                                coercion.malli/default-transformer-provider,
+                              :formats
+                                {"application/json"
+                                   coercion.malli/json-transformer-provider}}},
+                        :error-keys #{:humanized},
+                        :lite true,
+                        :compile m.util/closed-schema,
+                        :validate true,
+                        :strip-extra-keys true,
+                        :default-values true,
+                        :options nil})}})
+             (ring/routes (swagger-ui/create-swagger-ui-handler {:path
+                                                                   "/api-docs"})
+                          (ring/create-default-handler)))]
     (if dev? (ring/reloading-ring-handler handler) (handler))))

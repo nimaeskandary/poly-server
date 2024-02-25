@@ -26,7 +26,7 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * poly - `brew install polyfy/polylith/poly`
 * psql - `brew install postgresql`
 * clj-kondo - `brew install borkdude/brew/clj-kondo`
-  * there is a pre commit hook that runs `clj-kondo --lint` on changed files
+* zprint - `brew install --cask zprint`
 
 ## Getting things working with your IDE
 
@@ -41,6 +41,21 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 * start a clojure nrepl with opts `-A:dev:test`
 * the dev system will start on its own via loading `components/development/user.clj`
 * go to http://localhost:9000/api-docs/ to see endpoints and send requests from your browser
+
+## Linting and formatting
+
+You can create pre commit hook to lint files before they are committed
+
+* `touch .git/hooks/pre-commit`
+* add contents
+```bash
+#!/usr/bin/env bash
+./bin/kondo-diff.sh
+exit $?
+```
+* `chmod +x .git/hooks/pre-commit`
+
+You can force a commit through if you want with the `--no-verify` flag
 
 ## Polylith commands
 
