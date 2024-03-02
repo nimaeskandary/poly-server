@@ -1,5 +1,5 @@
 (ns nimaeskandary.db.lib.sql-db
-  (:require [nimaeskandary.logging.interface :as log]
+  (:require [taoensso.timbre :as log]
             [com.stuartsierra.component :as component]
             [next.jdbc.connection :as connection])
   (:import (com.zaxxer.hikari HikariDataSource)))
@@ -14,14 +14,13 @@
 
 (extend-type SqlDatabase
  component/Lifecycle
-   (start [{:keys [logger],
-            {{:keys [dbname dbtype], :as db-spec} :db-spec,
+   (start [{{{:keys [dbname dbtype], :as db-spec} :db-spec,
              {:keys [username password], :as pool-config} :pool-config}
             :config,
             :as this}]
      {:pre [(every? some? [dbtype dbname username password])]}
      (let [jdbcUrl (connection/jdbc-url db-spec)]
-       (log/info logger "creating connection pool" {:jdbcUrl jdbcUrl})
+       (log/info "creating connection pool" {:jdbcUrl jdbcUrl})
        (-> this
            (assoc :datasource (connection/->pool
                                HikariDataSource

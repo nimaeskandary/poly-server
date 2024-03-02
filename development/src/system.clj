@@ -2,7 +2,6 @@
   (:require [nimaeskandary.db.interface.sql :as sql-db]
             [nimaeskandary.user.interface.sql :as user-repo]
             [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
-            [nimaeskandary.logging.interface.timbre :as logger]
             [nimaeskandary.server.interface.http-kit :as server]
             [nimaeskandary.web.core :as web.core]
             [com.stuartsierra.component :as component]))
@@ -12,7 +11,6 @@
 (defn dev-system-map
   [_]
   (component/system-map
-   :logger (logger/create-timbre-logger)
    :app-db
    (sql-db/create-sql-db
     {:db-spec
@@ -23,11 +21,10 @@
    :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
 
 (def dependency-map
-  {:logger [],
-   :app-db [:logger],
-   :app-db-migrations {:logger :logger, :db :app-db},
-   :user-repo [:logger :app-db],
-   :server [:logger :user-repo]})
+  {:app-db [],
+   :app-db-migrations {:db :app-db},
+   :user-repo [:app-db],
+   :server [:user-repo]})
 
 (defn create-dev-system
   []

@@ -1,20 +1,17 @@
 (ns nimaeskandary.db.interface.sql-test
   (:require [nimaeskandary.testing.system.db :as db]
-            [nimaeskandary.logging.interface :as logger]
             [next.jdbc :as jdbc]
             [next.jdbc.result-set :as result-set]
             [honey.sql :as sql]
             [honey.sql.helpers :as h]
             [com.stuartsierra.component :as component]
-            [shrubbery.core :refer [stub]]
             [clojure.test :refer [deftest testing is]]))
 
 (deftest sql-db-test
-  (let [system (-> (component/system-map :logger (stub logger/Logger)
-                                         :db (db/create-in-memory-postgres-db
-                                              "test"))
-                   (component/system-using {:logger [], :db [:logger]})
-                   component/start)
+  (let [system
+        (-> (component/system-map :db (db/create-in-memory-postgres-db "test"))
+            (component/system-using {:db []})
+            component/start)
         db-component (:db system)]
     (testing "component start adds datasource"
       (is (some? (:datasource db-component))))
