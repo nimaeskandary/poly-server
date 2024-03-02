@@ -14,5 +14,5 @@
 
 (comment
   (nimaeskandary.user.interface/save-user
-    (:user-repo system/*system*)
-    {:username "jdoe", :email "jdoe@email.com", :id (random-uuid)}))
+   (:user-repo system/*system*)
+   {:username "jdoe", :email "jdoe@email.com", :id (random-uuid)}))

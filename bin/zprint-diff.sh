@@ -14,7 +14,8 @@ fi
 FILES=$(git diff --cached --name-only --diff-filter=AM "$against" | grep -E '.clj[cs]?$')
 [ -z "$FILES" ] && exit 0
 
-if ! (echo "$FILES" | xargs zprint -w)
+# search config is needed to tell it to use the .zprint.edn in the root of this project
+if ! (echo "$FILES" | xargs zprint '{:search-config? true}' -w)
 then
     echo
     echo "Error: zprint errors found. Please fix them and retry the commit."

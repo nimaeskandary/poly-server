@@ -8,5 +8,5 @@
 (defn create-in-memory-postgres-db
   [db-name]
   (sql-db/create-sql-db
-    {:db-spec {:dbtype "h2:mem", :dbname db-name, :MODE "PostgreSQL"},
-     :pool-config {:username "", :password ""}}))
+   {:db-spec {:dbtype "h2:mem", :dbname db-name, :MODE "PostgreSQL"},
+    :pool-config {:username "", :password ""}}))

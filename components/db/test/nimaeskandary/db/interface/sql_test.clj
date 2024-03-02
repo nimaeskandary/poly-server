@@ -12,7 +12,7 @@
 (deftest sql-db-test
   (let [system (-> (component/system-map :logger (stub logger/Logger)
                                          :db (db/create-in-memory-postgres-db
-                                               "test"))
+                                              "test"))
                    (component/system-using {:logger [], :db [:logger]})
                    component/start)
         db-component (:db system)]
@@ -36,7 +36,7 @@
                                 (h/from :test)
                                 (sql/format))
                             {:builder-fn
-                               result-set/as-unqualified-lower-maps}))))
+                             result-set/as-unqualified-lower-maps}))))
     (testing "component stop removes datasource"
       (is (nil? (-> (component/stop system)
                     :db

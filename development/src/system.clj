@@ -12,16 +12,15 @@
 (defn dev-system-map
   [_]
   (component/system-map
-    :logger (logger/create-timbre-logger)
-    :app-db (sql-db/create-sql-db {:db-spec {:dbtype "postgres",
-                                             :dbname "app",
-                                             :host "localhost",
-                                             :port "55432"},
-                                   :pool-config {:username "postgres",
-                                                 :password "password"}})
-    :app-db-migrations (app-db-migrations/create-app-db-migrations)
-    :user-repo (user-repo/create-sql-user-repository)
-    :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
+   :logger (logger/create-timbre-logger)
+   :app-db
+   (sql-db/create-sql-db
+    {:db-spec
+     {:dbtype "postgres", :dbname "app", :host "localhost", :port "55432"},
+     :pool-config {:username "postgres", :password "password"}})
+   :app-db-migrations (app-db-migrations/create-app-db-migrations)
+   :user-repo (user-repo/create-sql-user-repository)
+   :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
 
 (def dependency-map
   {:logger [],

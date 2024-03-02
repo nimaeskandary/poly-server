@@ -12,10 +12,9 @@
                         :middleware [],
                         :timestamp-opts timbre/default-timestamp-opts,
                         :output-fn timbre/default-output-fn,
-                        :appenders {:println (appenders/println-appender
-                                               {:stream :auto}),
-                                    :spit (appenders/spit-appender
-                                            {:fname "./logs"})}})]
+                        :appenders
+                        {:println (appenders/println-appender {:stream :auto}),
+                         :spit (appenders/spit-appender {:fname "./logs"})}})]
         (timbre/set-config! config)
         (assoc this :config config)))
     (stop [this] this)

@@ -14,8 +14,8 @@
                   {:id (:users/id r),
                    :email (:users/email r),
                    :username (:users/username r)}))
-    []
-    results))
+          []
+          results))
 
 (defn create-user
   [{:keys [app-db]} user]
@@ -43,11 +43,11 @@
 (defrecord SqlUserRepository [])
 
 (extend-type SqlUserRepository
-  interface/UserRepository
-    (create-user [this user] (create-user this user))
-    (get-user [this user-id] (get-user this user-id)))
+ interface/UserRepository
+   (create-user [this user] (create-user this user))
+   (get-user [this user-id] (get-user this user-id)))
 
 (extend-type SqlUserRepository
-  component/Lifecycle
-    (start [this] this)
-    (stop [this] this))
+ component/Lifecycle
+   (start [this] this)
+   (stop [this] this))
