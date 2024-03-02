@@ -4,6 +4,7 @@
 **/.cpcache
 **/.DS_Store
 **/.gradle
+.cpcache
 
 # User-specific stuff
 .idea/
@@ -36,7 +37,7 @@ projects/**/pom.xml
 docker/volumes
 
 # project
-logs
+logs/
 
 ## h2
 *.db
