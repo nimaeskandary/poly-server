@@ -32,14 +32,14 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 
 * see https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/development
 * some notes for Cursive
-  * select the Aliases `dev, test`
+  * select the Aliases `dev, test` in the Clojure Deps tool window
   * Go to `Settings→Languages & Frameworks→Clojure→Project Specific Options and check "Resolve over whole project"` to make things resolve correctly across different subprojects with our root `deps.edn` setup
 
 ## Running locally
 
 * run `bin/docker-up.sh`
 * start a clojure repl (ie `clj -A:dev:test`)
-* the dev system will start on its own via loading `components/development/user.clj`
+* the dev system will start on its own via loading `development/src/user.clj`
 * go to http://localhost:9000/api-docs/ to see endpoints and send requests from your browser
 
 ## Linting and formatting

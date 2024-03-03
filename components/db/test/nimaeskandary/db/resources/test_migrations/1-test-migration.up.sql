@@ -1,4 +1,4 @@
 CREATE TABLE IF NOT EXISTS testing (
-    id UUID NOT NULL,
+    id INT NOT NULL,
     PRIMARY KEY (id)
 );
