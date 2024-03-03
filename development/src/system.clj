@@ -1,7 +1,6 @@
 (ns system
-  (:require [nimaeskandary.db.interface.sql :as sql-db]
+  (:require [nimaeskandary.db.interface.sql-db :as sql-db]
             [nimaeskandary.user.interface.sql :as user-repo]
-            [nimaeskandary.migrations.interface.app-db :as app-db-migrations]
             [nimaeskandary.server.interface.http-kit :as server]
             [nimaeskandary.web.core :as web.core]
             [com.stuartsierra.component :as component]))
@@ -15,16 +14,13 @@
    (sql-db/create-sql-db
     {:db-spec
      {:dbtype "postgres", :dbname "app", :host "localhost", :port "55432"},
-     :pool-config {:username "postgres", :password "password"}})
-   :app-db-migrations (app-db-migrations/create-app-db-migrations)
+     :pool-config {:username "postgres", :password "password"},
+     :migratus-config {:migrations-dir "db/migrations/app_db",
+                       :migration-table-name "migrations"}})
    :user-repo (user-repo/create-sql-user-repository)
    :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
 
-(def dependency-map
-  {:app-db [],
-   :app-db-migrations {:db :app-db},
-   :user-repo [:app-db],
-   :server [:user-repo]})
+(def dependency-map {:app-db [], :user-repo [:app-db], :server [:user-repo]})
 
 (defn create-dev-system
   []

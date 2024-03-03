@@ -4,13 +4,11 @@
                   :extra-deps {poly/web {:local/root "bases/web"}
                                poly/testing {:local/root "components/testing"}
                                poly/server {:local/root "components/server"}
-                               poly/migrations {:local/root "components/migrations"}
                                poly/db {:local/root "components/db"}
                                poly/user {:local/root "components/user"}}}
             :test {:extra-paths ["bases/web/test"
                                  "components/testing/test"
                                  "components/server/test"
-                                 "components/migrations/test"
                                  "components/db/test"
                                  "components/user/test"]
                    :extra-deps {com.h2database/h2 {:mvn/version "2.2.224"}

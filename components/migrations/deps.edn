@@ -1,6 +1,0 @@
-{:paths ["src" "resources"]
- :deps {com.stuartsierra/component     {:mvn/version "1.1.0"}
-        migratus/migratus {:mvn/version "1.5.5"}
-        com.fzakaria/slf4j-timbre {:mvn/version "0.4.1"}}
- :aliases {:test {:extra-paths ["test"]
-                  :extra-deps {}}}}
