@@ -45,19 +45,28 @@
                     :datasource))))))
 
 (deftest sql-db-test-with-migrations
-  (let [system (-> (component/system-map :db
-                                         (db/create-in-memory-db
-                                          "test"
-                                          {:migration-table-name "migrations",
-                                           :migrations-dir
-                                           "resources/test_migrations"}))
+  (let [system (-> (component/system-map
+                    :db
+                    (db/create-in-memory-db
+                     "test"
+                     {:migration-table-name "migrations",
+                      :migrations-dir
+                      "nimaeskandary/db/resources/test_migrations"}))
                    (component/system-using {:db []})
                    component/start)
         db-component (:db system)]
     (testing "does get migration settings because migratus config provided"
       (is (some? (:migratus-settings db-component))))
-    (testing "can execute statements against created table"
+    (testing "can execute statements against table created from migrations"
       (->> (-> (h/insert-into :testing)
                (h/values [{:id 1}])
                (sql/format))
-           (jdbc/execute! db-component)))))
+           (jdbc/execute! db-component))
+      (is (= [{:id 1}]
+             (jdbc/execute! db-component
+                            (-> (h/select :*)
+                                (h/from :testing)
+                                (sql/format))
+                            {:builder-fn
+                             result-set/as-unqualified-lower-maps})))
+      (jdbc/execute! db-component ["DROP ALL OBJECTS"]))))
