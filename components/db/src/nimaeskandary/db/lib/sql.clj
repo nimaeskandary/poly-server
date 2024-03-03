@@ -49,7 +49,7 @@
                                                      with-migratus-settings)]
        (when migratus-settings
          (log/info "running migrations" {:migratus-settings migratus-settings})
-         (migrations/migrate migratus-settings))
+         (migrations/migrate this))
        this))
    (stop [{:keys [datasource], :as this}]
      (when datasource (.close ^HikariDataSource datasource))
