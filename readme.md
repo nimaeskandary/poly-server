@@ -38,8 +38,8 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 ## Running locally
 
 * run `bin/docker-up.sh`
-* start a clojure nrepl with opts `-A:dev:test`
-* the dev system will start on its own via loading `development/user.clj`
+* start a clojure repl (ie `clj -A:dev:test`)
+* the dev system will start on its own via loading `development/src/user.clj`
 * go to http://localhost:9000/api-docs/ to see endpoints and send requests from your browser
 
 ## Linting and formatting
