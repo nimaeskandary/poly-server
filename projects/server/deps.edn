@@ -1,4 +1,4 @@
-{:deps {poly/web  {:local/root "../../bases/cli"}
+{:deps {poly/http  {:local/root "../../bases/http"}
         poly/db {:local/root "../../components/db"}
         poly/user {:local/root "../../components/user"}
         poly/server {:local/root "../../components/user"}

@@ -1,4 +1,4 @@
-(ns nimaeskandary.web.middleware.core)
+(ns nimaeskandary.http.middleware.core)
 
 (def wrap-system
   {:name ::wrap-system,

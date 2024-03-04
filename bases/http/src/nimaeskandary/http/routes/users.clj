@@ -1,4 +1,4 @@
-(ns nimaeskandary.web.routes.users
+(ns nimaeskandary.http.routes.users
   (:require [nimaeskandary.user.interface :as user.interface]
             [nimaeskandary.user.interface.types :as user.types]
             [ring.util.response :as resp]))

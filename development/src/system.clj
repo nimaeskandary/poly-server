@@ -2,7 +2,7 @@
   (:require [nimaeskandary.db.interface.sql-db :as sql-db]
             [nimaeskandary.user.interface.sql :as user-repo]
             [nimaeskandary.server.interface.http-kit :as server]
-            [nimaeskandary.web.core :as web.core]
+            [nimaeskandary.http.core :as http.core]
             [com.stuartsierra.component :as component]))
 
 (defonce ^:dynamic *system* nil)
@@ -23,7 +23,7 @@
       :migratus-config {:migrations-dir "db/migrations/app_db",
                         :migration-table-name "migrations"}}
    :user-repo (user-repo/create-sql-user-repository)
-   :server (server/->HttpKitServer #'web.core/app {:port 9000} true)))
+   :server (server/->HttpKitServer #'http.core/app {:port 9000} true)))
 
 (def dependency-map {:app-db [], :user-repo [:app-db], :server [:user-repo]})
 

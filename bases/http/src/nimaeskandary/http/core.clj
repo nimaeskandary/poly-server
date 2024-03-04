@@ -1,6 +1,6 @@
-(ns nimaeskandary.web.core
-  (:require [nimaeskandary.web.routes.users :refer [user-routes]]
-            [nimaeskandary.web.middleware.core :as middleware.core]
+(ns nimaeskandary.http.core
+  (:require [nimaeskandary.http.routes.users :refer [user-routes]]
+            [nimaeskandary.http.middleware.core :as middleware.core]
             [reitit.ring.coercion :as ring.coercion]
             [reitit.ring :as ring]
             [reitit.ring.middleware.muuntaja :as middleware.muuntaja]
