@@ -1,5 +1,6 @@
 (ns nimaeskandary.user.lib.sql-user-repository
-  (:require [nimaeskandary.user.interface.types :as types]
+  (:require [next.jdbc.result-set :as result-set]
+            [nimaeskandary.user.interface.types :as types]
             [nimaeskandary.user.interface :as interface]
             [com.stuartsierra.component :as component]
             [honey.sql :as sql]
@@ -19,25 +20,24 @@
 
 (defn create-user
   [{:keys [app-db]} user]
-  (let [to-db (assoc user :id (random-uuid))]
-    (->> (-> (h/insert-into :users)
-             (h/values [to-db])
-             (h/returning :id :email :username)
-             (sql/format))
-         (jdbc/execute! app-db)
-         from-db
-         first)))
+  (let [to-db (assoc user :id (random-uuid))
+        q (-> (h/insert-into :users)
+              (h/values [to-db])
+              (sql/format))]
+    (jdbc/execute! app-db q)
+    to-db))
+
 (m/=> create-user types/create-user)
 
 (defn get-user
   [{:keys [app-db]} user-id]
-  (->> (-> (h/select :id :username :email)
-           (h/from :users)
-           (h/where [:= :id user-id])
-           (sql/format))
-       (jdbc/execute! app-db)
-       from-db
-       first))
+  (let [q (-> (h/select :id :username :email)
+              (h/from :users)
+              (h/where [:= :id user-id])
+              (sql/format))]
+    (-> (jdbc/execute! app-db q {:builder-fn result-set/as-lower-maps})
+        from-db
+        first)))
 (m/=> get-user types/get-user)
 
 (defrecord SqlUserRepository [])

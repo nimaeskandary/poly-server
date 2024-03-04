@@ -2,16 +2,15 @@
         org.clojure/clojure {:mvn/version "1.11.1"}}
  :aliases  {:dev {:extra-paths ["development/src"]
                   :extra-deps {poly/web {:local/root "bases/web"}
-                               poly/testing {:local/root "components/testing"}
                                poly/server {:local/root "components/server"}
                                poly/db {:local/root "components/db"}
-                               poly/user {:local/root "components/user"}}}
+                               poly/user {:local/root "components/user"}
+                               ;;
+                               com.h2database/h2 {:mvn/version "2.2.224"}}}
             :test {:extra-paths ["bases/web/test"
-                                 "components/testing/test"
                                  "components/server/test"
                                  "components/db/test"
                                  "components/user/test"]
-                   :extra-deps {com.h2database/h2 {:mvn/version "2.2.224"}
-                                com.gearswithingears/shrubbery {:mvn/version "0.4.1"}}}
+                   :extra-deps {}}
             :poly {:main-opts  ["-m" "polylith.clj.core.poly-cli.core"]
                    :extra-deps {polylith/clj-poly {:mvn/version "0.2.18"}}}}}

@@ -1,5 +1,5 @@
 (ns nimaeskandary.db.interface.sql-db-test
-  (:require [nimaeskandary.testing.system.db :as db]
+  (:require [nimaeskandary.db.interface.sql-db :as sql-db]
             [next.jdbc :as jdbc]
             [next.jdbc.result-set :as result-set]
             [honey.sql :as sql]
@@ -8,7 +8,12 @@
             [clojure.test :refer [deftest testing is]]))
 
 (deftest sql-db-test-no-migrations
-  (let [system (-> (component/system-map :db (db/create-in-memory-db "test"))
+  (let [system (-> (component/system-map
+                    :db
+                    (sql-db/create-sql-db
+                     {:db-spec
+                      {:dbtype "h2:mem", :dbname "test", :MODE "PostgreSQL"},
+                      :pool-config {:username "", :password ""}}))
                    (component/system-using {:db []})
                    component/start)
         db-component (:db system)]
@@ -45,15 +50,17 @@
                     :datasource))))))
 
 (deftest sql-db-test-with-migrations
-  (let [system (-> (component/system-map
-                    :db
-                    (db/create-in-memory-db
-                     "test"
-                     {:migration-table-name "migrations",
-                      :migrations-dir
-                      "nimaeskandary/db/resources/test_migrations"}))
-                   (component/system-using {:db []})
-                   component/start)
+  (let [system
+        (-> (component/system-map
+             :db
+             (sql-db/create-sql-db
+              {:db-spec {:dbtype "h2:mem", :dbname "test", :MODE "PostgreSQL"},
+               :pool-config {:username "", :password ""},
+               :migratus-config
+               {:migration-table-name "migrations",
+                :migrations-dir "nimaeskandary/db/resources/test_migrations"}}))
+            (component/system-using {:db []})
+            component/start)
         db-component (:db system)]
     (testing "does get migration settings because migratus config provided"
       (is (some? (:migratus-settings db-component))))
