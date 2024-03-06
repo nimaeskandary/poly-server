@@ -1,4 +1,4 @@
-(ns nimaeskandary.db.lib.migratus-migrations
+(ns nimaeskandary.db.migratus-migrations
   (:require [migratus.core :as migratus]))
 
 (defn ->migratus-settings

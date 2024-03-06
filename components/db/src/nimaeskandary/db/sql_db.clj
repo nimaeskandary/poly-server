@@ -1,5 +1,5 @@
-(ns nimaeskandary.db.lib.sql
-  (:require [nimaeskandary.db.lib.migratus-migrations :as migrations]
+(ns nimaeskandary.db.sql-db
+  (:require [nimaeskandary.db.migratus-migrations :as migrations]
             [taoensso.timbre :as log]
             [com.stuartsierra.component :as component]
             [next.jdbc.connection :as connection])

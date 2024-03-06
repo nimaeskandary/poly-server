@@ -1,6 +1,6 @@
 (ns system
-  (:require [nimaeskandary.db.interface.sql-db :as sql-db]
-            [nimaeskandary.user.interface.sql :as user-repo]
+  (:require [nimaeskandary.db.interface.db :as db]
+            [nimaeskandary.user.interface.user-repository :as user-repo]
             [nimaeskandary.server.interface.http-kit :as server]
             [nimaeskandary.http.core :as http.core]
             [com.stuartsierra.component :as component]))
@@ -11,7 +11,7 @@
   [_]
   (component/system-map
    :app-db
-   (sql-db/create-sql-db
+   (db/create-sql-db
     {:db-spec {:dbtype "h2:mem", :dbname "app", :MODE "PostgreSQL"},
      :pool-config {:username "", :password ""},
      :migratus-config {:migration-table-name "migrations",

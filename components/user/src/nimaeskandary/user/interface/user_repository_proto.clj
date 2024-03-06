@@ -1,4 +1,4 @@
-(ns nimaeskandary.user.interface)
+(ns nimaeskandary.user.interface.user-repository-proto)
 
 (defprotocol UserRepository
   (create-user [this user])

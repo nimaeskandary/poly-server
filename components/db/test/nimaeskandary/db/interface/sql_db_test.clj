@@ -1,5 +1,5 @@
 (ns nimaeskandary.db.interface.sql-db-test
-  (:require [nimaeskandary.db.interface.sql-db :as sql-db]
+  (:require [nimaeskandary.db.interface.db :as sql-db]
             [next.jdbc :as jdbc]
             [next.jdbc.result-set :as result-set]
             [honey.sql :as sql]

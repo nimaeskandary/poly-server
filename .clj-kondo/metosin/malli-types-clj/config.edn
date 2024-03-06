@@ -1,15 +1,15 @@
 {:linters {:unresolved-symbol {:exclude [(malli.core/=>)]},
-           :type-mismatch {:namespaces {nimaeskandary.user.lib.sql-user-repository {create-user {:arities {2 {:args [{:op :keys}
-                                                                                                                     {:op :keys,
-                                                                                                                      :req {:username :string,
-                                                                                                                            :email :string}}],
-                                                                                                              :ret {:op :keys,
-                                                                                                                    :req {:id :any,
-                                                                                                                          :username :string,
-                                                                                                                          :email :string}}}}},
-                                                                                    get-user {:arities {2 {:args [{:op :keys}
-                                                                                                                  :any],
-                                                                                                           :ret {:op :keys,
-                                                                                                                 :req {:id :any,
-                                                                                                                       :username :string,
-                                                                                                                       :email :string}}}}}}}}}}
+           :type-mismatch {:namespaces {nimaeskandary.user.sql-user-repository {create-user {:arities {2 {:args [{:op :keys}
+                                                                                                                 {:op :keys,
+                                                                                                                  :req {:username :string,
+                                                                                                                        :email :string}}],
+                                                                                                          :ret {:op :keys,
+                                                                                                                :req {:id :any,
+                                                                                                                      :username :string,
+                                                                                                                      :email :string}}}}},
+                                                                                get-user {:arities {2 {:args [{:op :keys}
+                                                                                                              :any],
+                                                                                                       :ret {:op :keys,
+                                                                                                             :req {:id :any,
+                                                                                                                   :username :string,
+                                                                                                                   :email :string}}}}}}}}}}
