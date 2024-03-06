@@ -1,6 +1,6 @@
 (ns nimaeskandary.http.core
   (:require [nimaeskandary.http.routes.users :refer [user-routes]]
-            [nimaeskandary.http.middleware.core :as middleware.core]
+            [nimaeskandary.routing.interface.middleware :as middleware]
             [reitit.ring.coercion :as ring.coercion]
             [reitit.ring :as ring]
             [reitit.ring.middleware.muuntaja :as middleware.muuntaja]
@@ -23,7 +23,7 @@
            {:data
             {;; for json response encoding
              :muuntaja muuntaja/instance,
-             :middleware [[middleware.core/wrap-system system]
+             :middleware [[middleware/wrap-system system]
                           ;; for json response encoding
                           middleware.muuntaja/format-middleware
                           ;; for malli coercions
