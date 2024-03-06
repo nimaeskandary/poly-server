@@ -59,7 +59,15 @@ exit $?
 
 You can force a commit through if you want with the `--no-verify` flag
 
-## Polylith commands
+## Polylith
+
+Polylith in a nutshell is an opinionated tool to help manage a monorepo. The guardrails in place help the monorepo share
+libraries of common code across multiple build artifacts, e.g. webservers, lambdas, cli tools. At a high level, 
+individual libs of common code are called `components` by the tool. Each component exposes an `interface` package. Outside
+of each component, e.g. from another component, you may only access what is inside the `interface` package of another
+component, everything else is private. The root `deps.edn` is so your local development environment and REPL can
+resolve all the code in the repo. In `projects/...` will be `deps.edn` files for individual build targets, and will only
+include components required to build that project.
 
 ### Libraries
 
@@ -71,8 +79,7 @@ You can force a commit through if you want with the `--no-verify` flag
 
 building block that encapsulates a specific domain or part of the system
 
-* `poly shell`
-* `create component name:user`
+* `poly create component name:user`
 * add component to `<root>/deps.edn`
 ```clojure
 {:aliases  {:dev {:extra-paths ["development/src"]
@@ -81,14 +88,12 @@ building block that encapsulates a specific domain or part of the system
             ;; to extra test paths
             :test {:extra-paths ["components/user/test"]}} 
 ```
-* `info`
 
 ### creating a base
 
 building block that exposes a public API to the outside world, e.g., external systems and users
 
-* `poly shell`
-* `create base name:web`
+* `poly create base name:web`
 * add base to `<root>/deps.edn`
 ```clojure
 :aliases  {:dev {:extra-paths ["development/src"]
@@ -102,8 +107,7 @@ building block that exposes a public API to the outside world, e.g., external sy
 
 used to build a deployable artifact
 
-* `poly shell`
-* `create project name:backend`
+* `poly create project name:backend`
 * add project to `<root>/workspace.edn`
 ```clojure
 {:projects {"backend" {:alias "backend"}}}
