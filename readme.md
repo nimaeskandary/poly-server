@@ -69,6 +69,17 @@ component, everything else is private. The root `deps.edn` is so your local deve
 resolve all the code in the repo. In `projects/...` will be `deps.edn` files for individual build targets, and will only
 include components required to build that project.
 
+
+Running `poly check` will give you warnings like your project depends on something else in the monorepo that it is not using,
+or errors like you are trying to use something from a namespace that is not in an interface package
+
+### testing
+
+* `poly test`
+
+This can include options like what bases, components, or projects you want to run tests for, with nothing will run tests
+for bases and components your projects in `projects/` depend on
+
 ### Libraries
 
 * `poly libs` - see project dependencies

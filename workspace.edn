@@ -7,4 +7,4 @@
  :tag-patterns {:stable "stable-*"
                 :release "v[0-9]*"}
  :projects {"development" {:alias "dev"}
-            "server" {:alias "server"}}}
+            "http-server" {:alias "http-server"}}}
