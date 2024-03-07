@@ -123,7 +123,7 @@ used to build a deployable artifact
 ```clojure
 {:projects {"backend" {:alias "backend"}}}
 ```
-* add components and bases to `<root>/projects/backend/deps.edn`
+* add components and bases to `<root>/projects/backend/deps.edn` e.g.
 ```clojure
 {:deps {poly/user {:local/root "../../components/user"} 
         poly/web  {:local/root "../../bases/cli"}}}
