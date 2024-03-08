@@ -15,4 +15,9 @@
                                  "components/user/test"]
                    :extra-deps {}}
             :poly {:main-opts  ["-m" "polylith.clj.core.poly-cli.core"]
-                   :extra-deps {polylith/clj-poly {:mvn/version "0.2.18"}}}}}
+                   :extra-deps {polylith/clj-poly {:mvn/version "0.2.18"}}}
+            ;; https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/build
+            :build {:deps {org.clojure/tools.deps {:mvn/version "0.18.1398"}
+                           io.github.clojure/tools.build {:mvn/version "0.9.6"}}
+                    :paths ["build/resources"]
+                    :ns-default build}}}

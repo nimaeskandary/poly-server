@@ -1,9 +1,10 @@
 (ns nimaeskandary.lambda.core
   (:require [clojure.pprint :refer [pprint]])
-  (:gen-class :implements com.amazonaws.services.lambda.runtime.RequestHandler)
+  (:gen-class :implements
+              [com.amazonaws.services.lambda.runtime.RequestHandler])
   (:import com.amazonaws.services.lambda.runtime.Context ;
            com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent ;
-           com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse
+           com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse ;
            (java.util HashMap)))
 
 (defn -handleRequest

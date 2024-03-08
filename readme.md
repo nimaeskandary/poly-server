@@ -1,14 +1,10 @@
-<img src="logo.png" width="30%" alt="Polylith" id="logo">
+This is a playground to test building a clojure monorepo managed by the polylith tool. Goals are to have multiple
+build artifacts, e.g. uberjars for an http server and lambda handlers, that are able to share common code
 
 The Polylith documentation can be found here:
 
 - The [high-level documentation](https://polylith.gitbook.io/polylith)
 - The [poly tool documentation](https://cljdoc.org/d/polylith/clj-poly/CURRENT)
-- The [RealWorld example app documentation](https://github.com/furkan3ayraktar/clojure-polylith-realworld-example-app)
-
-You can also get in touch with the Polylith Team on [Slack](https://clojurians.slack.com/archives/C013B7MQHJQ).
-
-<h1>poly-server</h1>
 
 # Table of Contents
 
@@ -16,7 +12,8 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
   * [Dependencies](#dependencies)
   * [Getting things working with your IDE](#getting-things-working-with-your-ide)
   * [Running locally](#running-locally)
-  * [Polylith commands](#polylith-commands)
+* [Build](#build)
+* [Polylith cheatsheet](#polylith-cheatsheet)
 
 # Development
 
@@ -31,7 +28,7 @@ You can also get in touch with the Polylith Team on [Slack](https://clojurians.s
 
 * see https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/development
 * some notes for Cursive
-  * select the Aliases `dev, test` in the Clojure Deps tool window
+  * select the Aliases `dev, test, build` in the Clojure Deps tool window to resolve all dependencies you have to work with
   * Go to `Settings→Languages & Frameworks→Clojure→Project Specific Options and check "Resolve over whole project"` to make things resolve correctly across different subprojects with our root `deps.edn` setup
 
 ## Running locally
@@ -59,7 +56,15 @@ exit $?
 
 You can force a commit through if you want with the `--no-verify` flag
 
-## Polylith
+# Build
+
+## lambda uberjar
+
+uberjar containing lambda handlers
+
+* `bin/build.sh lambda`
+
+# Polylith cheatsheet
 
 Polylith in a nutshell is an opinionated tool to help manage a monorepo. The guardrails in place help the monorepo share
 libraries of common code across multiple build artifacts, e.g. webservers, lambdas, cli tools. At a high level, 
@@ -79,6 +84,8 @@ or errors like you are trying to use something from a namespace that is not in a
 
 This can include options like what bases, components, or projects you want to run tests for, with nothing will run tests
 for bases and components your projects in `projects/` depend on
+
+If you use Intellij with the Cursive plugin, you can also execute tests like normal in your REPL
 
 ### Libraries
 

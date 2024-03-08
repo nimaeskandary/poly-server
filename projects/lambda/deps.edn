@@ -1,3 +1,6 @@
-{:deps {org.clojure/clojure {:mvn/version "1.11.1"}}
+{:deps {poly/lambda  {:local/root "../../bases/lambda"}
+        ;;
+        org.clojure/clojure {:mvn/version "1.11.1"}}
  :aliases {:test {:extra-paths []
-                  :extra-deps  {}}}}
+                  :extra-deps  {}}
+           :uberjar {:ns-compile [nimaeskandary.lambda.core]}}}
