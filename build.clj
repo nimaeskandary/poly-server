@@ -52,8 +52,8 @@
      computed.
 
    The project's deps.edn file must contain an :uberjar alias
-   which must contain at least :main, specifying the main ns
-   (to compile and to invoke)."
+   which must contain either :main, to build a jar with a main function to run on startup,
+   or :ns-compile, to build a library jar"
   [{:keys [project uber-file], :as opts}]
   (let [project-root (ensure-project-root "uberjar" project)
         aliases (with-dir (io/file project-root) (get-project-aliases))

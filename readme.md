@@ -33,7 +33,7 @@ The Polylith documentation can be found here:
 
 ## Running locally
 
-* start a clojure repl (ie `clj -A:dev:test`)
+* start a clojure repl (ie `clj -A:dev:test:build`)
 * the dev system will start on its own via loading `development/src/user.clj`
 * go to http://localhost:9000/api-docs/ to see endpoints and send requests from your browser
 
@@ -58,9 +58,12 @@ You can force a commit through if you want with the `--no-verify` flag
 
 # Build
 
-## lambda uberjar
+## http server uberjar
 
-uberjar containing lambda handlers
+* `bin/build.sh http-server`
+* run it `java -jar projects/http-server/target/http-server.jar`
+
+## lambda uberjar
 
 * `bin/build.sh lambda`
 
