@@ -8,6 +8,7 @@
 (extend-type HttpKitServer
  component/Lifecycle
    (start [{:keys [handler-fn http-kit-config dev?], :as this}]
+     {:pre [http-kit-config (some? handler-fn)]}
      (let [http-kit-config (merge {:error-logger (fn [msg ex]
                                                    (log/error msg ex)),
                                    :warn-logger (fn [msg ex] (log/warn msg ex)),

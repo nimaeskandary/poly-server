@@ -3,8 +3,10 @@
                           :migrations-dir "db/migrations/app_db"}}
          #profile {:dev {:db-spec
                          {:MODE "PostgreSQL", :dbname "app", :dbtype "h2:mem"},
-                         :pool-spec {:password "", :username ""}}}]}
-:server
-#profile {:dev {:dev? true, :port 9000}}
-:user-repo
-{}
+                         :pool-spec {:password "", :username ""}},
+                   :prod {:db-spec
+                          {:MODE "PostgreSQL", :dbname "app", :dbtype "h2:mem"},
+                          :pool-spec {:password "", :username ""}}}],
+ :server #profile {:dev {:dev? true, :http-kit-config {:port 9000}},
+                   :prod {:http-kit-config {:port 8080}}},
+ :user-repo {}}
