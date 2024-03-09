@@ -18,7 +18,7 @@
   :appenders {:println (appenders/println-appender {:stream :auto}),
               :spit (appenders/spit-appender {:fname "./logs/app.log"})}})
 
-(defonce _start-system (system/restart-dev-system))
+(defonce _start-http-server-system (system/restart-http-server-system))
 (defonce _start-malli (m.dev/start!))
 
 (defn spy [x] (clojure.pprint/pprint x) x)

@@ -6,13 +6,15 @@
                                poly/server {:local/root "components/server"}
                                poly/db {:local/root "components/db"}
                                poly/user {:local/root "components/user"}
+                               poly/config {:local/root "components/config"}
                                ;;
                                com.h2database/h2 {:mvn/version "2.2.224"}}}
             :test {:extra-paths ["bases/http/test"
                                  "bases/lambda/test"
                                  "components/server/test"
                                  "components/db/test"
-                                 "components/user/test"]
+                                 "components/user/test"
+                                 "components/config/test"]
                    :extra-deps {}}
             :poly {:main-opts  ["-m" "polylith.clj.core.poly-cli.core"]
                    :extra-deps {polylith/clj-poly {:mvn/version "0.2.18"}}}

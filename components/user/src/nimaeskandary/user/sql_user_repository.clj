@@ -1,7 +1,8 @@
 (ns nimaeskandary.user.sql-user-repository
   (:require [next.jdbc.result-set :as result-set]
             [nimaeskandary.user.interface.types :as types]
-            [nimaeskandary.user.interface.user-repository-proto :as user-repo-proto]
+            [nimaeskandary.user.interface.user-repository-proto :as
+             user-repo-proto]
             [com.stuartsierra.component :as component]
             [honey.sql :as sql]
             [honey.sql.helpers :as h]
@@ -40,10 +41,10 @@
         first)))
 (m/=> get-user types/get-user)
 
-(defrecord SqlUserRepository [])
+(defrecord SqlUserRepository [app-db])
 
 (extend-type SqlUserRepository
-  user-repo-proto/UserRepository
+ user-repo-proto/UserRepository
    (create-user [this user] (create-user this user))
    (get-user [this user-id] (get-user this user-id)))
 

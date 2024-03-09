@@ -1,0 +1,7 @@
+{:app-db {:db-spec {:dbtype "h2:mem", :dbname "app", :MODE "PostgreSQL"},
+          :pool-spec {:username "", :password ""},
+          :migratus-spec {:migration-table-name "migrations",
+                          :migrations-dir "db/migrations/app_db"}}
+ :user-repo {}
+ :server {:http-kit-config {:port 9000}
+          :dev? true}}

@@ -5,30 +5,30 @@
             [next.jdbc.connection :as connection])
   (:import (com.zaxxer.hikari HikariDataSource)))
 
-(defrecord SqlDatabase [config])
+(defrecord SqlDatabase [db-spec pool-spec migratus-spec])
 
 (defn with-jdbc-url
-  [{{{:keys [dbtype dbname], :as db-spec} :db-spec} :config, :as this}]
+  [{{:keys [dbtype dbname], :as db-spec} :db-spec, :as this}]
   {:pre [(every? some? [dbtype dbname])]}
   (assoc this :jdbcUrl (connection/jdbc-url db-spec)))
 
 (defn with-connection-pool
   [{:keys [jdbcUrl],
-    {{:keys [username password], :as pool-config} :pool-config} :config,
+    {:keys [username password], :as pool-spec} :pool-spec,
     :as this}]
   {:pre [(every? some? [username password])]}
   (log/info "creating connection pool" {:jdbcUrl jdbcUrl})
   (assoc this
          :datasource
          (connection/->pool HikariDataSource
-                            (assoc pool-config :jdbcUrl jdbcUrl))))
+                            (assoc pool-spec :jdbcUrl jdbcUrl))))
 
 (defn with-migratus-settings
-  [{:keys [datasource], {:keys [migratus-config]} :config, :as this}]
+  [{:keys [datasource migratus-spec], :as this}]
   (assoc this
          :migratus-settings
-         (when migratus-config
-           (migrations/->migratus-settings migratus-config datasource))))
+         (when migratus-spec
+           (migrations/->migratus-settings migratus-spec datasource))))
 
 ;; db-spec
 ;; see

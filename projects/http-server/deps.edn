@@ -2,6 +2,7 @@
         poly/db {:local/root "../../components/db"}
         poly/user {:local/root "../../components/user"}
         poly/server {:local/root "../../components/server"}
+        poly/config {:local/root "../../components/config"}
         ;;
         org.clojure/clojure {:mvn/version "1.11.1"}}
  :aliases {:test {:extra-paths []

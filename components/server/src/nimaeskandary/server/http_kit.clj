@@ -1,4 +1,4 @@
-(ns nimaeskandary.server.interface.http-kit
+(ns nimaeskandary.server.http-kit
   (:require [taoensso.timbre :as log]
             [com.stuartsierra.component :as component]
             [org.httpkit.server :as server]))

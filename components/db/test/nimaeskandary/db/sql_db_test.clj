@@ -1,5 +1,5 @@
-(ns nimaeskandary.db.interface.sql-db-test
-  (:require [nimaeskandary.db.interface.db :as sql-db]
+(ns nimaeskandary.db.sql-db-test
+  (:require [nimaeskandary.db.sql-db :as sql-db]
             [next.jdbc :as jdbc]
             [next.jdbc.result-set :as result-set]
             [honey.sql :as sql]
@@ -10,10 +10,10 @@
 (deftest sql-db-test-no-migrations
   (let [system (-> (component/system-map
                     :db
-                    (sql-db/create-sql-db
+                    (sql-db/map->SqlDatabase
                      {:db-spec
                       {:dbtype "h2:mem", :dbname "test", :MODE "PostgreSQL"},
-                      :pool-config {:username "", :password ""}}))
+                      :pool-spec {:username "", :password ""}}))
                    (component/system-using {:db []})
                    component/start)
         db-component (:db system)]
@@ -53,10 +53,10 @@
   (let [system
         (-> (component/system-map
              :db
-             (sql-db/create-sql-db
+             (sql-db/map->SqlDatabase
               {:db-spec {:dbtype "h2:mem", :dbname "test", :MODE "PostgreSQL"},
-               :pool-config {:username "", :password ""},
-               :migratus-config
+               :pool-spec {:username "", :password ""},
+               :migratus-spec
                {:migration-table-name "migrations",
                 :migrations-dir "nimaeskandary/db/resources/test_migrations"}}))
             (component/system-using {:db []})
