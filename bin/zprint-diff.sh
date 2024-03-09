@@ -11,7 +11,7 @@ else
     against=$(git hash-object -t tree /dev/null)
 fi
 
-FILES=$(git diff --cached --name-only --diff-filter=AM "$against" | grep -E '.clj[cs]?$')
+FILES=$(git diff --cached --name-only --diff-filter=AM "$against" | grep -E '.clj[cs]?$|.edn$')
 [ -z "$FILES" ] && exit 0
 
 # search config is needed to tell it to use the .zprint.edn in the root of this project

@@ -3,5 +3,5 @@
             [clojure.java.io :as io]))
 
 (defn http-server-config
-  []
-  (aero/read-config (io/resource "config/http-server.edn")))
+  [profile]
+  (aero/read-config (io/resource "config/http-server.edn") {:profile profile}))

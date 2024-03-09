@@ -10,7 +10,7 @@
   (alter-var-root #'http-server-system
                   (constantly (component/start
                                (http.system/create-http-server-system
-                                (config/http-server-config))))))
+                                (config/http-server-config :dev))))))
 
 (defn stop-http-server-system
   []
