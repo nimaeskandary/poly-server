@@ -1,4 +1,4 @@
-(ns nimaeskandary.http.core
+(ns nimaeskandary.http.routes.core
   (:require [nimaeskandary.http.routes.users :refer [user-routes]]
             [nimaeskandary.http.middleware.system :refer [wrap-system]]
             [reitit.ring.coercion :as ring.coercion]
@@ -10,7 +10,7 @@
             [malli.util :as m.util]
             [muuntaja.core :as muuntaja]))
 
-(defn app
+(defn app-ring-handler
   [{:keys [system dev?]}]
   (let [handler
         #(ring/ring-handler
