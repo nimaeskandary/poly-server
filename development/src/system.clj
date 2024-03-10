@@ -1,6 +1,6 @@
 (ns system
   (:require [nimaeskandary.http.system :as http.system]
-            [nimaeskandary.config.interface.core :as config]
+            [nimaeskandary.common.interface.config :as config]
             [com.stuartsierra.component :as component]))
 
 (defonce ^:dynamic http-server-system nil)
@@ -9,8 +9,8 @@
   []
   (alter-var-root #'http-server-system
                   (constantly (component/start
-                               (http.system/create-http-server-system
-                                (config/http-server-config :dev))))))
+                               (http.system/create-system
+                                (config/read-config "web/config.edn" :dev))))))
 
 (defn stop-http-server-system
   []

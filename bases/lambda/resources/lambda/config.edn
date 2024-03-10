@@ -1,0 +1,10 @@
+{:app-db
+ #merge [{:migratus-spec {:migration-table-name "migrations",
+                          :migrations-dir "db/migrations/app_db"}}
+         #profile {:dev {:db-spec
+                         {:MODE "PostgreSQL", :dbname "app", :dbtype "h2:mem"},
+                         :pool-spec {:password "", :username ""}},
+                   :prod {:db-spec
+                          {:MODE "PostgreSQL", :dbname "app", :dbtype "h2:mem"},
+                          :pool-spec {:password "", :username ""}}}],
+ :user-repo {}}

@@ -1,10 +1,10 @@
 (ns nimaeskandary.http.main
   (:require [com.stuartsierra.component :as component]
             [nimaeskandary.http.system :as system]
-            [nimaeskandary.config.interface.core :as config])
+            [nimaeskandary.common.interface.config :as config])
   (:gen-class))
 
 (defn -main
   []
-  (component/start (system/create-http-server-system (config/http-server-config
-                                                      :prod))))
+  (component/start (system/create-system (config/read-config "web/config.edn"
+                                                             :prod))))

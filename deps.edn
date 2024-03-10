@@ -1,25 +1,23 @@
-{:deps {com.taoensso/timbre {:mvn/version "6.5.0"}
-        org.clojure/clojure {:mvn/version "1.11.1"}}
- :aliases  {:dev {:extra-paths ["development/src"]
-                  :extra-deps {poly/http {:local/root "bases/http"}
-                               poly/lambda {:local/root "bases/lambda"}
-                               poly/server {:local/root "components/server"}
-                               poly/db {:local/root "components/db"}
-                               poly/user {:local/root "components/user"}
-                               poly/config {:local/root "components/config"}
-                               ;;
-                               com.h2database/h2 {:mvn/version "2.2.224"}}}
-            :test {:extra-paths ["bases/http/test"
-                                 "bases/lambda/test"
-                                 "components/server/test"
-                                 "components/db/test"
-                                 "components/user/test"
-                                 "components/config/test"]
-                   :extra-deps {}}
-            :poly {:main-opts  ["-m" "polylith.clj.core.poly-cli.core"]
-                   :extra-deps {polylith/clj-poly {:mvn/version "0.2.18"}}}
-            ;; https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/build
-            :build {:deps {org.clojure/tools.deps {:mvn/version "0.18.1398"}
-                           io.github.clojure/tools.build {:mvn/version "0.9.6"}}
-                    :paths ["build/resources"]
-                    :ns-default build}}}
+{:aliases {:dev {:extra-deps {poly/http {:local/root "bases/http"},
+                              poly/lambda {:local/root "bases/lambda"},
+                              poly/server {:local/root "components/server"},
+                              poly/db {:local/root "components/db"},
+                              poly/user {:local/root "components/user"},
+                              poly/common {:local/root "components/common"},
+                              ;;
+                              com.h2database/h2 {:mvn/version "2.2.224"}},
+                 :extra-paths ["development/src"]},
+           :test {:extra-deps {},
+                  :extra-paths ["bases/http/test" "bases/lambda/test"
+                                "components/server/test" "components/db/test"
+                                "components/user/test"
+                                "components/common/test"]},
+           :poly {:extra-deps {polylith/clj-poly {:mvn/version "0.2.18"}},
+                  :main-opts ["-m" "polylith.clj.core.poly-cli.core"]},
+           ;; https://cljdoc.org/d/polylith/clj-poly/0.2.19/doc/build
+           :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"},
+                          org.clojure/tools.deps {:mvn/version "0.18.1398"}},
+                   :ns-default build,
+                   :paths ["build/resources"]}},
+ :deps {com.taoensso/timbre {:mvn/version "6.5.0"},
+        org.clojure/clojure {:mvn/version "1.11.1"}}}

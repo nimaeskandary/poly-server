@@ -14,7 +14,7 @@
 
 (defn dependency-map [] {:app-db [], :user-repo [:app-db], :server []})
 
-(defn create-http-server-system
+(defn create-system
   [config]
   (-> (system-map)
       ((fn [s] (merge-with merge s config)))
