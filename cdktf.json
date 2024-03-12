@@ -1,0 +1,11 @@
+{
+  "projectId": "d30105c5-2d17-4c89-91db-5e0e54d194ad",
+  "language": "java",
+  "app": "clojure -X:devops nimaeskandary.devops.terraform.core/synth",
+  "output": "terraform/cdktf.out",
+  "terraformProviders": [],
+  "context": {
+    "excludeStackIdFromLogicalIds": "true",
+    "allowSepCharsInLogicalIds": "true"
+  }
+}

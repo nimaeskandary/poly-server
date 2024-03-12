@@ -19,10 +19,13 @@ The Polylith documentation can be found here:
 
 ## Dependencies
 
-* docker
+* java - https://adoptium.net/installation/
+* clojure - `brew install clojure/tools/clojure`
+* docker - https://docs.docker.com/desktop/install/mac-install/
 * poly - `brew install polyfy/polylith/poly`
 * clj-kondo - `brew install borkdude/brew/clj-kondo`
 * zprint - `brew install --cask zprint`
+* cdktf - `brew install cdktf`
 
 ## Getting things working with your IDE
 

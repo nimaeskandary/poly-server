@@ -1,0 +1,14 @@
+{
+  "version": "0.21.0-pre.65",
+  "stacks": {
+    "application-stack": {
+      "name": "application-stack",
+      "constructPath": "application-stack",
+      "workingDirectory": "stacks/application-stack",
+      "synthesizedStackPath": "stacks/application-stack/cdk.tf.json",
+      "stackMetadataPath": "stacks/application-stack/metadata.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}

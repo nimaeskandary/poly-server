@@ -1,0 +1,54 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "application-stack",
+      "version": "0.21.0-pre.65"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "aws": [
+      {
+        "region": "us-east-1"
+      }
+    ]
+  },
+  "resource": {
+    "aws_s3_bucket": {
+      "bucket": {
+        "//": {
+          "metadata": {
+            "path": "application-stack/bucket",
+            "uniqueId": "bucket"
+          }
+        }
+      }
+    },
+    "aws_vpc": {
+      "private-vpc": {
+        "//": {
+          "metadata": {
+            "path": "application-stack/private-vpc",
+            "uniqueId": "private-vpc"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "application-stack.tfstate",
+        "workspace_dir": "terraform"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.40.0"
+      }
+    }
+  }
+}

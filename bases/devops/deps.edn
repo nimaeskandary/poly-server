@@ -1,0 +1,5 @@
+{:aliases {:test {:extra-deps {}, :extra-paths ["test"]}},
+ :deps {com.hashicorp/cdktf {:mvn/version "0.21.0-pre.65"},
+        com.hashicorp/cdktf-provider-aws {:mvn/version "19.9.0"},
+        software.constructs/constructs {:mvn/version "10.3.0"}},
+ :paths ["src" "resources"]}
